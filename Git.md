@@ -63,7 +63,10 @@ Esos son dos comandos que todo usuario de git debe comprender. Indiferentemente 
 Son los medios para registrar versiones de un proyecto en el historial del repo.
 
 En adición con git add y git commit el comando git push es esencial para un flujo de trabajo colaborativo completo. Git push es usado para enviar los cambios guardados a un repositorio remoto. Esto permite a otro miembros del equipo tener acceso al conjunto de cambios guardados.
-cambios para comitear
+
+-Los archivos supervisados
+
+En lugar de commitear cada cambio de has hecho desde el último commit, la supervision te permite agrupar cambios relacionados antes de comitearlos en la historia del proyecto. Esto significa que puedes hacer todo tipo de edición
 
 -Guardando cambios al repositorio
 git commit
@@ -81,3 +84,5 @@ usamos el comando git add para añadir el archivo a supervisión.
 Usamos git commit para comitear los archivos previamente añadidos a supervision.
 Comentamos el commit para añdir información de lo que hemos añadido en esta nueva versión.
 git commit -m "added where are the changes & what they do".
+
+vamos a rompre git
