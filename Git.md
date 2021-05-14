@@ -9,6 +9,8 @@ git clone, git config, git add, git status, git commit, git push, git pull, git 
 Es el sistema de control de versiones más extendido y moderno a día de hoy a nivel mundial.
 Git está desarrollado y es un proyecto de código abierto activamente mantenido y desarrollado en 2005 por Linus Torvalds. El famoso creador de Linus y los sistemas operativos basados en kernel.
 
+---
+
 -Preparando un repositorio.
 
 git init/ git clone/ git config
@@ -50,6 +52,8 @@ Cuando lo ejecutes, la última versión de los archivos del repositorio en la ra
 La carpeta será renombrada con el nombre del repo.
 Esta carpeta, además de los archivos del repositorio tendrá la historia completa de modificaciónes de versión del repositorio original, además se creará una rama maestra local.
 
+---
+
 -Git Add
 
 El comando de git add añade los cambios de la carpeta en que estemos trabajando a supervisión. git add realmente no causa modificaciónes la repositorio hasta que hacemos el git commit.
@@ -66,7 +70,37 @@ En adición con git add y git commit el comando git push es esencial para un flu
 
 -Los archivos supervisados
 
-En lugar de commitear cada cambio de has hecho desde el último commit, la supervision te permite agrupar cambios relacionados antes de comitearlos en la historia del proyecto. Esto significa que puedes hacer todo tipo de edición
+En lugar de commitear cada cambio que has hecho desde el último commit, la supervision te permite agrupar cambios relacionados antes de comitearlos en la historia del proyecto. Esto significa que puedes hacer todo tipo de edición para agrupar archivos relacionados antes de hacer un commit.
+Es importante crear commits atómicos que hagan más fácil el seguimiento de bugs para revertir los cambios con el menor impacto posible.
+
+-Opciones comúnes:
+git add <file>
+Añade a supervisión los cambios de los archivos nombrados
+git add <directory>
+Añade a supervisión los cambios de las carpetas nombradas
+git add .
+Añade todos los cambios desde la raiz del bash
+git add -p
+Añade un bloque de los cambios realizados en un archivo, esto te permite de forma manual controlar los cambios en un mensaje de la consola.
+Para el bloque de cambios
+y para aceptar el bloque de cambios
+s para partir el bloque en partes más pequeñas
+e para editar el bloque manualmente
+q para salir
+
+-Relacion entre git add y git commit
+
+Cuando empiezas un proyecto puedes crear un commit para el estado inicial en ese directorio, usando ambos comandos juntos asi:
+
+git add . git commit
+
+Una vez que estás corriendo el proyecto, los nuevos archivos pueden ser añadidos y pasados al path de git add:
+
+git add hello.py git commit
+
+# git no diferencia entre archivos supervisados en archivos y archivos nuevos que acaban de ser añadidos al repositorio.
+
+---
 
 -Guardando cambios al repositorio
 git commit
@@ -85,4 +119,12 @@ Usamos git commit para comitear los archivos previamente añadidos a supervision
 Comentamos el commit para añdir información de lo que hemos añadido en esta nueva versión.
 git commit -m "added where are the changes & what they do".
 
-vamos a rompre git
+---
+
+-git diff
+
+Diferenciar es una función que toma dos datos de entrada y devuelve los cambios entre éstos.
+git diff es un comando de uso múltiple.
+Estos datos diferenciales pueden ser comiteados, podemos crear ramas a partir de ellos, archivos y más.
+Vamos a ver los diferentes patrones de flujo de trabajo con git diff.
+git diff es comúnmente usado a su vez con git status y git log para analizar el estado actual de un repositorio.
