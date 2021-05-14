@@ -128,3 +128,20 @@ git diff es un comando de uso múltiple.
 Estos datos diferenciales pueden ser comiteados, podemos crear ramas a partir de ellos, archivos y más.
 Vamos a ver los diferentes patrones de flujo de trabajo con git diff.
 git diff es comúnmente usado a su vez con git status y git log para analizar el estado actual de un repositorio.
+
+Información de salida raw
+
+El siguiente ejemplo se ejecuta en un repositorio simple.
+El repo ha sido creado con éstos comandos:
+
+$:> mkdir diff_test_repo
+$:> cd diff_test_repo
+$:> touch diff_test.txt
+$:> echo "this is a git diff test example" > diff_test.txt
+$:> git init .
+Initialized empty Git repository in /Users/kev/code/test/.git/
+$:> git add diff_test.txt
+$:> git commit -am"add diff test file"
+[master (root-commit) 6f77fc3] add diff test file
+1 file changed, 1 insertion(+)
+create mode 100644 diff_test.txt
