@@ -145,3 +145,63 @@ $:> git commit -am"add diff test file"
 [master (root-commit) 6f77fc3] add diff test file
 1 file changed, 1 insertion(+)
 create mode 100644 diff_test.txt
+
+Si ejecutamos el git diff en este punto, no habrá salida, esto es un comportamiento esperado cuando no hay cambios en el repositorio para diferenciar.
+
+Una vez que hemos creado el repositorio y añadido el archivo diff_test.txt podemos cambiar el contenido del archivo para experimentar con la salida de git diff.
+
+$:> echo "this is a diff example" > diff_test.txt
+Con esto modificamos el contenido desde bash del archivo diff_test.txt
+Ahora podrémos ver y analizar los cambios con git diff:
+
+diff --git a/diff_test.txt b/diff_test.txt
+index 6b0c6cf..b37e70a 100644
+--- a/diff_test.txt
++++ b/diff_test.txt
+@@ -1 +1 @@
+-this is a git diff test example
++this is a diff example
+
+Vamos a analizar esta salida por puntos
+
+# Comparion input
+
+diff --git a/diff_test.txt b/diff_test.txt
+Aquí podemos ver un a diff_text y un b diff_test
+
+# Meta data
+
+index 6b0c6cf..b37e70a 100644
+
+Esta linea muestra alguna info interna de Git, normalmente no necesitarás esta info.
+El número corresponde con el hast de versión del objeto en git
+
+# Marcadores para cambios
+
+--- a/diff_test.txt
++++ b/diff_test.txt
+
+Estas líneas son leyendas asignadas a cada entrada del diff
+con --- en a y +++ en b
+
+# Diff bloques
+
+La salida del diff que nos queda es una lista de bloques, el diff solo muestra las secciones del archivos que han sido modificadas.
+En nuestro ejemplo, solo contamos con un bloque, los bloques tienen su propia semantica de salida
+
+@@ -1 +1 @@
+--- a/diff_test.txt
++++ b/diff_test.txt
+
+La primera línea es la cabecera del bloque, cada bloque pretende ser encapsulado entre simbolos de @@. El contenido de la cabecera es un sumario de los cambios realizados en el archivo. En nuestro ejemplo de salida tenemos -1 y +1 significando que una linea ha cambiado. En un diff más realista nosotros podríamos ver una cabecera más parecida a ésta:
+
+@@ -34,6 +34,8 @@
+
+En este ejemplo, el header nos muestra que han sido extraidas 6 líneas empezando en la línea 34 y adicionalmente 8 líneas han sido
+añadidas empezando en la línea 34
+
+-Resaltando cambios.
+
+git diff --color-words
+
+git diff además tiene un modo para resaltar los cambios de una mejor manera: --color-words. Este modo simplemente crea un resalte de color entre las líneas agregadas y borradas y luego las resalta para diferenciarlas.
