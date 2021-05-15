@@ -304,3 +304,88 @@ index 0000000..d92368b
 -Partial stashes
 
 Puedes elegir para stashear un archivo único, una colección de archivos o cambios individuales de entre los archivos. Si le pasas el parametro -p o --patch a git stash, integrará integrará un bloque entre cada cambio en tu copia de trabajo y te preguntará donde quieres stashearlo.
+
+Si pulsas git stash ? te aparece una lista más completa de comandos que puedes utilizar
+
+-Creando una rama para nuestro stash
+
+Si los cambios de tu rama divergen de los cambios en tu stash, puedes tener algunos conflictos cuando quieras hacer git stash pop o git stash apply, para evitar estos conflictos, quizás prefieras crear una rama para los cambios del stash, puedes hacerlo utilizando para ello:
+
+git stash branch
+
+Nuestra nueva rama estará basada en el commit de la que fue creada, entonces hará un pop de tus cambios stasheados en ella.
+
+-Limpiando el stash
+
+Si decides que ya no necesitas un stash en particular, puedes borrarlo con git stash drop:
+
+git stash drop stash@{1}
+
+O podrías borrar todos los stashes almacenados con:
+
+git stash clear
+
+-Gitignore
+
+Git tiene 3 formas de ver los archivos de tu copia de trabajo:
+Archivos,trackeados, sin trackear o ignorados.
+
+Los archivos ignorados son artefactos de la creación de un proyecto o generados por la máquina y pueden ser derivados del código de tu repo o deberían de otro modo no ser comiteados. Algunos ejemplos son:
+
+cachés de dependencias, código compilado, código compilado, directorios de salida de builds, archivos generados en tiempo de ejecución, archivos ocultos de sistema, o configuraciones personales del IDE.
+
+Los archivos ignorados son trackeados en especial el gitignore, que es comprobado en la raiz del repositorio.
+Este archivo solo puede ser añadido o comiteado manualmente, y en el especificamos que archivos de nuestro queremos que sea o no ignorado.
+
+Inspeccionando un repositorio
+-Git status
+
+El comando git status muestra un estado del directorio de trabajo y su estado actual, te deha ver los cambios que han sido stageados, los que no y los archivos que no han sido trackeados.
+Git status no proporciona ningun tipo de información de salida como el historial de los commits, para esto necesitamos usar git log.
+
+Comandos relacionados a git status:
+
+git tag:
+los tags son referencias de puntos especificos en la historia de git.
+Generalmente son usados para capturar un punto en la historia como podría una versión de release (ver 1.0).
+
+git blame:
+la función principal de git blame es mostrar la información del autor unida a un lineas especificas de un archivo o un archivo en sí. Es usado para extraer información de quien o porque modificaron x archivo o lineas de código.
+ejemplos:
+
+git blame filename
+git blame filename -L 0,10
+
+-Git log:
+git log muestra una lista de los commits realizados en el repositorio. Esto te permite listar la historia del proyecto, filtrarla o buscar cambios especificos.
+
+La salida de este comando puede ser definida de difentes formas para recibir un historial más especifico para el caso que estemos buscando.
+
+git log:
+
+git log -n <limit>
+Limita el numero de commits por, por ejemplo: git log -n 3 mostrará solo 3 commits desde el más actual.
+
+git log --oneline
+Condensa cada commit en una línea única, es útil para ver una vista más global de la historia del proyecto.
+
+git log --stat
+además de la información ordinaria de git log, incluye que archivos fueron alterados y el número relativo de líneas que fueron añadidas o borradas de cada uno de ellos.
+
+git log -p
+Muestra la ruta representada en cada commit, muestra el diff completo en cada commit, el cual es una vista más detallada que puedes tener en la historia de tu proyecto.
+
+git log --author="<pattern>"
+Busca los commits de un autor en particular. El parametro puede ser un texto plano o una expresión regular.
+
+git log --grep="<pattern>"
+Busca commits con un mensaje que coincida, el cual puede ser texto plano o expresion regular.
+
+git log <since>..<until>
+Muestra los commits que vas desde since hasta until, ambos argumentos pueden ser también un commitID, en nombre de una rama, una cabecera, o algún tipo de referencia de revisión.
+
+git log <file>
+Solo muestra los commits que incluyen un archivo especifico, es una forma fácil de ver la historia de un archivo en particular.
+
+git log --graph --decorate --oneline
+Una opción bastante útil a considerar. El flah de --graph dibujará a la izquierda basado en texto un gráfico de los commits. --decorate añade los nombres de las ramas y tags de los commits que son mostrados.--oneline condensa la info de los commits en una sola línea para que sea más fácil navergar entre ellos.
