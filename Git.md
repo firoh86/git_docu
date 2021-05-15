@@ -226,3 +226,42 @@ Los dos puntos en este ejemplo indican que son las puntas de ambas ramas. Esto f
 git diff branch1...other-feature-branch
 
 El operador de tres puntos nos mostrará las diferencias entre la rama de referencia y la rama master desde que éstas se separaron.
+
+-Git stash
+
+git stash nos permite crear una copia de nuestro trabajo no comiteado para movernos a trabajar en otra cosa como otra rama, otro feature manteniendo una copia de nuestro trabajo en el estado actual.Para poder volver después y seguir trabajando con ello.
+
+Los comandos son:
+
+git stash, copia los archivos stageados y trackeados
+git stash -u copia además los archivos no trackeados
+git stash -a copia todos los archivos, incluyendo también los archivos ignorados (gitignore).
+
+# Hay que tener en cuenta que por defecto git stash no incluye los archivos no trackeados o ignorados.
+
+Para reaplicar los cambios de tu stash a tu rama actual lo hacemos con el comando:
+git stash pop
+(git stash pop aplica los cambios guardados en el stash y los borra del stash).
+
+Para reaplicar los cambios a tu rama actual manteniendo la copia del stash lo podemos hacer con el comando:
+
+git stash apply
+(De esta manera pese a aplicar los cambios, los mantenemos en el stash para trabajar con ellos más tarde o en otra rama si nos fuese necesario).
+
+-Manejando múltiples stashes
+
+Podemos crear tantos stashes como queramos para trabajar con ellos.
+Sería una buena práctica anotar una descripción para cuando trabajamos con múltiples copias del stash, podemos hacerlo de esta manera:
+
+git stash save "menssage"
+
+Para ver la lista de copias creadas con el stash lo podemos hacer con:
+
+git stash list
+
+los stashes se muestran con la cabecera de la rama y el commit o mensaje guardado de esta manera.
+
+$ git stash list
+stash@{0}: WIP on master: 5002d47 our new homepage
+stash@{1}: WIP on master: 5002d47 our new homepage
+stash@{2}: WIP on master: 5002d47 our new homepage
