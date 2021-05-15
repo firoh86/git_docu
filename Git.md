@@ -205,3 +205,24 @@ añadidas empezando en la línea 34
 git diff --color-words
 
 git diff además tiene un modo para resaltar los cambios de una mejor manera: --color-words. Este modo simplemente crea un resalte de color entre las líneas agregadas y borradas y luego las resalta para diferenciarlas.
+
+-Comparando archivos entre dos commits diferentes
+
+A git diff le puedes pasar referencias de dos commits para diferenciar, ejemplos de referencias son head, etiquetas y nombres de ramas.
+Cada commit en Git tiene un ID. Puedes conseguirlos ejecutando git log. También puedes pasar este commit id a git diff:
+
+Pasando una ref diff con estado actual
+Pasando dos reds diff entre ambos estados.
+
+# Comprobando los cambios entre dos ramas.
+
+Las ramas son comparadas del mísmo modo como si estuviesemos comparando dos commits, pasandole los imputs:
+
+git diff branch1..other-feature-branch
+
+Este ejemplo introduce el operador de puntos suspensivos.
+Los dos puntos en este ejemplo indican que son las puntas de ambas ramas. Esto funciona igual si intecambiamos el operador de dos puntos por un espacio entre las ramas.
+
+git diff branch1...other-feature-branch
+
+El operador de tres puntos nos mostrará las diferencias entre la rama de referencia y la rama master desde que éstas se separaron.
