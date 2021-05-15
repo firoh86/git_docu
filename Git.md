@@ -265,3 +265,42 @@ $ git stash list
 stash@{0}: WIP on master: 5002d47 our new homepage
 stash@{1}: WIP on master: 5002d47 our new homepage
 stash@{2}: WIP on master: 5002d47 our new homepage
+
+Por defecto git stash pop aplicará los cambios del stash más recientemente creado.
+puedes elegir que stash quieres reaplicar pasandole el identificador como argumento, por ejemplo:
+
+git stash pop stash@{2}
+
+-Viendo las stash diffs
+
+puedes ver un sumario de diferencias de un stash con git stash show:
+
+$ git stash show
+
+index.html | 1 +
+style.css | 3 +++
+2 files changed, 4 insertions(+)
+
+O también puedes ver una lista completa de las diferencias del stash pasandole el parametro -p ó --path
+
+$ git stash show -p
+
+diff --git a/style.css b/style.css
+new file mode 100644
+index 0000000..d92368b
+--- /dev/null
++++ b/style.css
+@@ -0,0 +1,3 @@
++\* {
+
+- text-decoration: blink;
+  +}
+  diff --git a/index.html b/index.html
+  index 9daeafb..ebdcbd2 100644
+  --- a/index.html
+  +++ b/index.html
+  @@ -1 +1,2 @@ +<link rel="stylesheet" href="style.css"/>
+
+-Partial stashes
+
+Puedes elegir para stashear un archivo único, una colección de archivos o cambios individuales de entre los archivos. Si le pasas el parametro -p o --patch a git stash, integrará integrará un bloque entre cada cambio en tu copia de trabajo y te preguntará donde quieres stashearlo.
