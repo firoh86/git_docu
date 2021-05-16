@@ -576,3 +576,19 @@ Compressing objects: 100% (12/12), done.
 Writing objects: 100% (14/14), 2.05 KiB | 0 bytes/s, done.
 Total 14 (delta 3), reused 0 (delta 0)
 To git@bitbucket.com:atlasbro/gittagdocs.git \* [new tag] v1.4 -> v1.4
+
+Para pushear varias etiquetas simultaneamente, podemos pasar el parametro --tags cuando usemos el comando git push. Cuando otros usuarios clonen o puleen el repo, reciviran las nuevas etiquetas.
+
+## Checking 0ut Tags.(comprobando etiquetas)
+
+git checkout v1.4
+
+El comando de arriba comprobará la etiqueta v1.4. Esto pondrá el repositorio en un header separado. Esto significa que cualquien cambio realizado en este header no será reflejado en la etiqueta.
+Se creará un nuevo commit separado. Éste nuevo commit separado no será parte de ninguna rama y solo será accesible directamente por la persona que referencie dicho hash.
+De todas formas las buenas prácticas recomiendan que crees una rama, si vas ha hacer cambios en un header separado.
+
+## Deleting tags (borrando etiquetas)
+
+Para borrar etiquetas los hacemos directamente pasandole el parámetro -d y un identificador de etiqueta, ésto borrará el identificador de etiqueta.
+
+git tag -d v1
