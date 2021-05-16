@@ -472,8 +472,6 @@ Una opción bastante útil a considerar. El flag de --graph dibujará a la izqui
 
 ---
 
----
-
 ## Git tag
 
 En este apartado vamos a ver el concepto de etiquetar y los comandos de `git tag` las etiquetas son referencias a puntos en la historia de git. Son usados normalmente para apuntar a versiones de lanzamiento (v1.0). Una etiqueta es como una rama que no cambia, a diferencia de las ramas, las etiquetas después de ser creadas, no tienen más historial de commits en esa rama.
@@ -490,6 +488,8 @@ Reemplaza el tagname con un identificador semantico para el estado del repositor
 
 Las etiquetas anotadas guardan información extra (Metadata). El nombre de quien crea la etiqueta, email y fecha, etc...
 
+---
+
 ## Annotated Tags (etiquetas anotadas)
 
 Las etiquetas anotadas son guardadas en la base de git como objetos completos. Para reiterar, guardan metadata como el nombre de quien etiqueta, el email o la fecha. Similar a los commits y los mensajes de los commits, las etiquetas anotadas tienen un mensaje de etiqueta. En adición por seguridad las etiquetas anotadas pueden ser firmadas con GNU privacy Guard (GPG). Las mejores prácticas suguieren que se usen annotated tags en lugar de etiquetas ligeras para tener más control ya que éstas guardan información adicional.
@@ -502,9 +502,77 @@ git tag -a v1.4 -m "my version 1.4"
 
 Este comando es similar a la ejecución anterior, pero con el parametro adicional de -m podemos crear el mesaje de la etiqueta como hacemos con el commit -m para no tener que insertarlo después desde el editor de texto.
 
+---
+
 ## Etiquetas ligeras (lightweight tags)
 
 git tag v1.4-lw
 
 Ejecutando este comando podemos crear una etiqueta ligera identificada como v1.4-lw. Éstas etiquetas son creadas sin -a -s o -m.
 Éstas etiquetas son creadas como un comprobante de etiqueta y almacenadas en .git/directorio del repositorio del proyecto.
+
+---
+
+## Listing tags (listar etiquetas)
+
+Podemos mostrar una lista de las etiquetas guardadas con:
+
+git tag
+
+Para tener más control sobre la lista de etiquetas mostradas podemos pasar el parametro -l con una expresión definida:
+
+git tag -l _-rc_
+
+$ git tag -l _-rc_
+v0.10.0-rc1
+v0.11.0-rc1
+v0.12.0-rc1
+v0.13.0-rc1
+v0.13.0-rc2
+v0.14.0-rc1
+v0.9.0-rc1
+v15.0.0-rc.1
+v15.0.0-rc.2
+v15.4.0-rc.3
+
+_el prefijo -rc se usa por convencion para determinar release candidates_
+
+---
+
+## Tagging old commits (Etiquetando viejos commits)
+
+En el ejemplo anterior hemos usado la etiqueta para adjuntarla al commit que esté en la cabecera en ese momento como referencia. Pero podemos usar el tag en un commit especifico para etiquetar viejos commits. Podemos ver una lista de los commits con git log.
+
+Podemos crear el tag para el commit especifico pasandole el id.
+
+git tag -a v1.2 15027957951b64cf874c3557a0f3547bd83b3ff6
+
+Ejecutando este comando de git crearemos una nueva etiqueta anotada con el identificador v1.2 para el commit que seleccionamos en el ejemplo anterior de git log.
+
+---
+
+## Reetiquetando o reemplazando etiquetas.
+
+Al intentar crear una etiqueta con un identificador diferente donde ya existía una etiqueta anterior, git nos mostrará este error:
+
+fatal: tag 'v0.4' already exists
+
+En adición si intentamos etiquetar un commit anterior con un identificador de etiqueta ya existente, nos arrojará el mismo error.
+
+Para este caso deberíamos actualizar la etiqueta existente y lo podemos hacer con la opción de -f (force).
+
+git tag -a -f v1.4 15027957951b64cf874c3557a0f3547bd83b3ff6
+
+**_Cuando forzamos un identificador ya usado, este se colocará en el nuevo commit y se borrará del commit anterior, esto sucede por que solo podemos tener un identificador único en la historia de git._**
+
+## Sharing: Pushing Tags to Remote
+
+Compartir etiquetas es similar a pushear ramas. Por defecto, git push no pasará las etiquetas. Éstas deben ser pasadas explicitamente al git push.
+
+git push origin v1.4
+Counting objects: 14, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (14/14), 2.05 KiB | 0 bytes/s, done.
+Total 14 (delta 3), reused 0 (delta 0)
+To git@bitbucket.com:atlasbro/gittagdocs.git \* [new tag] v1.4 -> v1.4
