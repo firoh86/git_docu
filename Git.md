@@ -30,7 +30,7 @@ Los términos que vamos a cubrir en esta documentación serán:
 Es el sistema de control de versiones más extendido y moderno a día de hoy a nivel mundial.
 Git está desarrollado y es un proyecto de código abierto activamente mantenido y desarrollado en 2005 por Linus Torvalds. El famoso creador de Linux y los sistemas operativos basados en kernel.
 
---- 
+---
 
 ## Preparando un repositorio
 
@@ -39,7 +39,7 @@ Git está desarrollado y es un proyecto de código abierto activamente mantenido
 Inicializando un nuevo repositorio GIT.
 
 Para crear un nuevo repositorio, usarás el comando `git init`.
-*git init* es un comando que usarás una vez durante la creación inicial del repositorio.
+_git init_ es un comando que usarás una vez durante la creación inicial del repositorio.
 Ejecutando este comando, se creará un subdirectorio nuevo .git en la dirección actual, esto además creará una nueva master branch.
 
 ---
@@ -55,21 +55,20 @@ Se puede realizar de dos maneras, yendo a la ruta y ejecutando `git init` ó eje
 ## Comandos
 
 ## Git clone
+
 ### Clonando un repositorio existente
 
-
-Si el proyecto ya ha sido creado como un repositorio central, el comando de *git clone*, es la forma comúnmente más usada para obtener un clone de desarrollo local.
-Al igual que git init, *git clone es una operación de un solo uso*, una vez que el desarrollador ha obtenido una copia funcional del proyecto, todas las operaciones de control de versiones, serán manejadas a través del repositorio local.
-
+Si el proyecto ya ha sido creado como un repositorio central, el comando de _git clone_, es la forma comúnmente más usada para obtener un clone de desarrollo local.
+Al igual que git init, _git clone es una operación de un solo uso_, una vez que el desarrollador ha obtenido una copia funcional del proyecto, todas las operaciones de control de versiones, serán manejadas a través del repositorio local.
 
 `git clone <repo url>`
-
 
 Git soporta diferentes protocolos de conexión y formatos de URLs.
 En este ejemplo estaremos usando el protocolo SSH
 por ejemplo: **git@HOSTNAME:USERNAME/REPONAME.git**
 
 Los valores dados en éste caso serían los siguientes:
+
 ```
 HOSTNAME: bitbucket.org
 
@@ -92,9 +91,10 @@ En conjunción con esos comandos, necesitarás además git status para ver en qu
 (Se muestran los archivos con seguimiento que se tendrán en cuenta para el siguiente commit).
 
 ### Cómo funciona:
+
 `git add y git commit` son comandos que componen el flujo de trabajo fundamental de git.
 Estos son dos comandos que todo usuario de git debe comprender. Indiferentemente del flujo de trabajo de su equipo de desarrollo.
-***Son los medios para registrar versiones de un proyecto en el historial del repo.***
+**_Son los medios para registrar versiones de un proyecto en el historial del repo._**
 
 En adición con git add y git commit el comando `git push` es esencial para un flujo de trabajo colaborativo completo. `Git push` es usado para enviar los cambios guardados a un repositorio remoto. Esto permite a otro miembros del equipo tener acceso al conjunto de cambios guardados.
 
@@ -129,22 +129,22 @@ Cuando empiezas un proyecto puedes crear un commit para el estado inicial en ese
 ```
 git add . git commit
 ```
+
 Una vez que estás corriendo el proyecto, los nuevos archivos pueden ser añadidos y pasados al path de git add:
+
 ```
 git add hello.py git commit
 ```
 
-***git no diferencia entre archivos supervisados en archivos y archivos nuevos que acaban de ser añadidos al repositorio.***
+**_git no diferencia entre archivos supervisados en archivos y archivos nuevos que acaban de ser añadidos al repositorio._**
 
 ---
-
 
 ## Git commit
 
 ### Guardando cambios al repositorio
 
-[Ver convención para los commits](
-https://www.conventionalcommits.org/es/v1.0.0-beta.2/#especificaci%c3%b3n)
+[Ver convención para los commits](https://www.conventionalcommits.org/es/v1.0.0-beta.2/#especificaci%c3%b3n)
 
 Una vez que tienes un repositorio inicializado o clonado, ya puedes empezar a hacer commits de los cambios de los archivos.(toma un snapshot del estado actual de los archivos que han sido modificados).
 El siguiente ejemplo asume que tienes un repositorio inicializado en:
@@ -155,6 +155,7 @@ El siguiente ejemplo asume que tienes un repositorio inicializado en:
 -Usamos el comando `git add` para añadir el archivo a supervisión.
 -Usamos `git commit` para comitear los archivos previamente añadidos a supervision.
 -Comentamos el commit para añadir información de lo que hemos añadido en esta nueva versión.
+
 ```
 git commit -m "added where are the changes & what they do".
 ```
@@ -170,8 +171,10 @@ Vamos a ver los diferentes patrones de flujo de trabajo con git diff.
 `git diff` es comúnmente usado a su vez con `git status` y `git log` para analizar el estado actual de un repositorio.
 
 ### Información de salida raw
+
 El siguiente ejemplo se ejecuta en un repositorio simple.
 El repo ha sido creado con éstos comandos:
+
 ```
 $:> mkdir diff_test_repo
 $:> cd diff_test_repo
@@ -185,6 +188,7 @@ $:> git commit -am"add diff test file"
 1 file changed, 1 insertion(+)
 create mode 100644 diff_test.txt
 ```
+
 Si ejecutamos el `git diff` en este punto, no habrá salida, esto es un comportamiento esperado cuando no hay cambios en el repositorio para diferenciar.
 
 Una vez que hemos creado el repositorio y añadido el archivo diff_test.txt podemos cambiar el contenido del archivo para experimentar con la salida de git diff.
@@ -192,8 +196,10 @@ Una vez que hemos creado el repositorio y añadido el archivo diff_test.txt pode
 ```
 $:> echo "this is a diff example" > diff_test.txt
 ```
+
 Con esto modificamos el contenido desde bash del archivo diff_test.txt
 Ahora podremos ver y analizar los cambios con git diff:
+
 ```
 diff --git a/diff_test.txt b/diff_test.txt
 index 6b0c6cf..b37e70a 100644
@@ -207,12 +213,15 @@ index 6b0c6cf..b37e70a 100644
 Vamos a analizar esta salida por puntos
 
 ### Comparison input
+
 ```
 diff --git a/diff_test.txt b/diff_test.txt
 ```
+
 Aquí podemos ver un a diff_text y un b diff_test
 
 ### Meta data
+
 ```
 index 6b0c6cf..b37e70a 100644
 ```
@@ -221,6 +230,7 @@ Esta línea muestra alguna info interna de Git, normalmente no necesitarás esta
 El número corresponde con el hash de versión del objeto en git
 
 ### Marcadores para cambios
+
 ```
 --- a/diff_test.txt
 +++ b/diff_test.txt
@@ -229,6 +239,7 @@ El número corresponde con el hash de versión del objeto en git
 Estas líneas son leyendas asignadas a cada entrada del diff con --- en a y +++ en b
 
 ### Diff bloques
+
 La salida del diff que nos queda es una lista de bloques, el diff solo muestra las secciones del archivos que han sido modificadas.
 En nuestro ejemplo, solo contamos con un bloque, los bloques tienen su propia semántica de salida
 
@@ -239,21 +250,25 @@ En nuestro ejemplo, solo contamos con un bloque, los bloques tienen su propia se
 ```
 
 La primera línea es la cabecera del bloque, cada bloque pretende ser encapsulado entre simbolos de @@. El contenido de la cabecera es un sumario de los cambios realizados en el archivo. En nuestro ejemplo de salida tenemos -1 y +1 significando que una línea ha cambiado. En un diff más realista nosotros podríamos ver una cabecera más parecida a ésta:
+
 ```
 @@ -34,6 +34,8 @@
 ```
+
 En este ejemplo, el header nos muestra que han sido extraidas 6 líneas empezando en la línea 34 y adicionalmente 8 líneas han sido
 añadidas empezando en la línea 34
 
 ### Resaltando cambios
+
 ```
 git diff --color-words
 ```
+
 `git diff` además tiene un modo para resaltar los cambios de una mejor manera: `--color-words`. Este modo simplemente crea un resalte de color entre las líneas agregadas y borradas y luego las resalta para diferenciarlas.
 
 - Comparando archivos entre dos commits diferentes
-A `git diff` le puedes pasar referencias de dos commits para diferenciar, ejemplos de referencias son head, etiquetas y nombres de ramas.
-Cada commit en Git tiene un ID. Puedes conseguirlos ejecutando `git log`. También puedes pasar este commit id a git diff:
+  A `git diff` le puedes pasar referencias de dos commits para diferenciar, ejemplos de referencias son head, etiquetas y nombres de ramas.
+  Cada commit en Git tiene un ID. Puedes conseguirlos ejecutando `git log`. También puedes pasar este commit id a git diff:
 
   Pasando una ref diff con estado actual
   Pasando dos reds diff entre ambos estados.
@@ -275,7 +290,7 @@ git diff branch1...other-feature-branch
 
 El operador de tres puntos nos mostrará las diferencias entre la rama de referencia y la rama master desde que éstas se separaron.
 
---- 
+---
 
 ## Git stash
 
@@ -287,7 +302,7 @@ Los comandos son:
 `git stash -u` copia además los archivos no trackeados.
 `git stash -a` copia todos los archivos, incluyendo también los archivos ignorados (gitignore).
 
-***Hay que tener en cuenta que por defecto git stash no incluye los archivos no trackeados o ignorados.***
+**_Hay que tener en cuenta que por defecto git stash no incluye los archivos no trackeados o ignorados._**
 
 Para reaplicar los cambios de tu stash a tu rama actual lo hacemos con el comando:
 `git stash pop`
@@ -309,12 +324,14 @@ Para ver la lista de copias creadas con el stash lo podemos hacer con:
 `git stash list`
 
 Los stashes se muestran con la cabecera de la rama y el commit o mensaje guardado de esta manera.
+
 ```
 $ git stash list
 stash@{0}: WIP on master: 5002d47 our new homepage
 stash@{1}: WIP on master: 5002d47 our new homepage
 stash@{2}: WIP on master: 5002d47 our new homepage
 ```
+
 Por defecto `git stash pop` aplicará los cambios del stash más recientemente creado.
 Puedes elegir que stash quieres reaplicar pasándole el identificador como argumento, por ejemplo:
 
@@ -322,9 +339,10 @@ Puedes elegir que stash quieres reaplicar pasándole el identificador como argum
 
 ### Viendo las stash diffs
 
-Puedes ver un sumario de diferencias de un stash con *git stash show*:
+Puedes ver un sumario de diferencias de un stash con _git stash show_:
 
 `$ git stash show`
+
 ```
 index.html | 1 +
 style.css | 3 +++
@@ -334,6 +352,7 @@ style.css | 3 +++
 O también puedes ver una lista completa de las diferencias del stash pasándole el parametro `-p` ó `--path`
 
 `$ git stash show -p`
+
 ```
 diff --git a/style.css b/style.css
 new file mode 100644
@@ -377,6 +396,7 @@ O podrías borrar todos los stashes almacenados con:
 `git stash clear`
 
 ---
+
 ## Gitignore
 
 Git tiene 3 formas de ver los archivos de tu copia de trabajo:
@@ -390,6 +410,7 @@ Los archivos ignorados son trackeados en especial el gitignore, que es comprobad
 Este archivo solo puede ser añadido o comiteado manualmente, y en él especificamos que archivos de nuestro queremos que sea o no ignorado.
 
 ---
+
 ## Git status
 
 #### Inspeccionando un repositorio
@@ -406,11 +427,14 @@ Generalmente son usados para capturar un punto en la historia como podría una v
 `git blame`
 La función principal de git blame es mostrar la información del autor unida a un lineas especificas de un archivo o un archivo en sí. Es usado para extraer información de quien o porque modificaron x archivo o lineas de código.
 ejemplos:
+
 ```
 git blame filename
 git blame filename -L 0,10
 ```
+
 ---
+
 ## Git log
 
 **git log** muestra una lista de los commits realizados en el repositorio. Esto te permite listar la historia del proyecto, filtrarla o buscar cambios especificos.
@@ -445,3 +469,42 @@ Solo muestra los commits que incluyen un archivo especifico, es una forma fácil
 
 `git log --graph --decorate --oneline`
 Una opción bastante útil a considerar. El flag de --graph dibujará a la izquierda basado en texto un gráfico de los commits. --decorate añade los nombres de las ramas y tags de los commits que son mostrados.--oneline condensa la info de los commits en una sola línea para que sea más fácil navegar entre ellos.
+
+---
+
+---
+
+## Git tag
+
+En este apartado vamos a ver el concepto de etiquetar y los comandos de `git tag` las etiquetas son referencias a puntos en la historia de git. Son usados normalmente para apuntar a versiones de lanzamiento (v1.0). Una etiqueta es como una rama que no cambia, a diferencia de las ramas, las etiquetas después de ser creadas, no tienen más historial de commits en esa rama.
+En este apartado cubriremos los difentes tipos de etiqueta, como crearlas, listarlas, borrarlas, compartirlas y más.
+
+Creando etiquetas
+
+Podemos crear una etiqueta con el siguiente comando.
+git tag <tagname>
+
+Reemplaza el tagname con un identificador semantico para el estado del repositorio. Un patron común es usar el número de version como git tag v1.4. Git soporta dos tipos de etiqueta, las etiquetas ligeras son esencialmente como marcapáginas para poner un nombre de puntero a un commit, muy útil para crear pequeños links a commits relevantes, una buena práctica es crear estas etiquetas como privadas.
+
+---
+
+Las etiquetas anotadas guardan información extra (Metadata). El nombre de quien crea la etiqueta, email y fecha, etc...
+
+## Annotated Tags (etiquetas anotadas)
+
+Las etiquetas anotadas son guardadas en la base de git como objetos completos. Para reiterar, guardan metadata como el nombre de quien etiqueta, el email o la fecha. Similar a los commits y los mensajes de los commits, las etiquetas anotadas tienen un mensaje de etiqueta. En adición por seguridad las etiquetas anotadas pueden ser firmadas con GNU privacy Guard (GPG). Las mejores prácticas suguieren que se usen annotated tags en lugar de etiquetas ligeras para tener más control ya que éstas guardan información adicional.
+
+git tag -a v1.4
+
+Ejecutando este comando crearemos una etiqueta aotada con el identificador v1.4. El comando abrirá una ventana adicional, para insertar información adicional.
+
+git tag -a v1.4 -m "my version 1.4"
+
+Este comando es similar a la ejecución anterior, pero con el parametro adicional de -m podemos crear el mesaje de la etiqueta como hacemos con el commit -m para no tener que insertarlo después desde el editor de texto.
+
+## Etiquetas ligeras (lightweight tags)
+
+git tag v1.4-lw
+
+Ejecutando este comando podemos crear una etiqueta ligera identificada como v1.4-lw. Éstas etiquetas son creadas sin -a -s o -m.
+Éstas etiquetas son creadas como un comprobante de etiqueta y almacenadas en .git/directorio del repositorio del proyecto.
