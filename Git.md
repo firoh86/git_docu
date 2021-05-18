@@ -1,10 +1,14 @@
 # Comprendiendo / Aprendiendo GIT
+[Inicio |](Readme.md) [Siguiente](resources.md)
 
-Los términos que vamos a cubrir en esta documentación serán:
+## Los términos que vamos a cubrir en esta documentación serán:
 
 - [¿Qué es GIT?](#que-es-git)
+
 - [Preparando un repositorio](#preparando-un-repositorio)
+
 - [Versionando un proyecto existente](#versionando-un-proyecto-existente-con-un-nuevo-repositorio-git)
+
 - [Comandos GIT](#comandos)
 
   - [git clone](#git-clone)
@@ -25,14 +29,14 @@ Los términos que vamos a cubrir en esta documentación serán:
 
 ---
 
-## ¿Qué es GIT?
+## ¿Qué es GIT? 
 
 Es el sistema de control de versiones más extendido y moderno a día de hoy a nivel mundial.
 Git está desarrollado y es un proyecto de código abierto activamente mantenido y desarrollado en 2005 por Linus Torvalds. El famoso creador de Linux y los sistemas operativos basados en kernel.
 
----
 
-## Preparando un repositorio
+## Preparando un repositorio 
+
 
 **git init/ git clone/ git config**
 
@@ -42,21 +46,20 @@ Para crear un nuevo repositorio, usarás el comando `git init`.
 _git init_ es un comando que usarás una vez durante la creación inicial del repositorio.
 Ejecutando este comando, se creará un subdirectorio nuevo .git en la dirección actual, esto además creará una nueva master branch.
 
----
-
-## Versionando un proyecto existente con un nuevo repositorio git
+ 
+## Versionando un proyecto existente con un nuevo repositorio git 
 
 Este ejemplo asume que ya tienes una carpeta con un proyecto existente para el que te gustaría crear un repositorio. Lo primero que deberías hacer es ir a la ruta raiz del proyecto para ejecutar el git init.
 
 Se puede realizar de dos maneras, yendo a la ruta y ejecutando `git init` ó ejecutando git init y pasando la ruta como parámetro `git <project directory>`
 
----
 
-## Comandos
 
-## Git clone
+## Comandos 
 
-### Clonando un repositorio existente
+### Git clone
+
+#### 🔹 Clonando un repositorio existente
 
 Si el proyecto ya ha sido creado como un repositorio central, el comando de _git clone_, es la forma comúnmente más usada para obtener un clone de desarrollo local.
 Al igual que git init, _git clone es una operación de un solo uso_, una vez que el desarrollador ha obtenido una copia funcional del proyecto, todas las operaciones de control de versiones, serán manejadas a través del repositorio local.
@@ -81,16 +84,17 @@ Cuando lo ejecutes, la última versión de los archivos del repositorio en la ra
 La carpeta será renombrada con el nombre del repo.
 Esta carpeta, además de los archivos del repositorio tendrá la historia completa de modificaciónes de versión del repositorio original, además se creará una rama maestra local.
 
----
 
-## Git add
+
+### Git add
+#### 🔹 Añadiendo cambios
 
 El comando de `git add` añade los cambios de la carpeta en que estemos trabajando a supervisión. git add realmente no causa modificaciones al repositorio hasta que hacemos el git commit.
 
 En conjunción con esos comandos, necesitarás además git status para ver en que estado se encuentra la supervisión.
 (Se muestran los archivos con seguimiento que se tendrán en cuenta para el siguiente commit).
 
-### Cómo funciona:
+#### Cómo funciona:
 
 `git add y git commit` son comandos que componen el flujo de trabajo fundamental de git.
 Estos son dos comandos que todo usuario de git debe comprender. Indiferentemente del flujo de trabajo de su equipo de desarrollo.
@@ -98,7 +102,7 @@ Estos son dos comandos que todo usuario de git debe comprender. Indiferentemente
 
 En adición con git add y git commit el comando `git push` es esencial para un flujo de trabajo colaborativo completo. `Git push` es usado para enviar los cambios guardados a un repositorio remoto. Esto permite a otro miembros del equipo tener acceso al conjunto de cambios guardados.
 
-### Los archivos supervisados
+#### Los archivos supervisados
 
 En lugar de commitear cada cambio que has hecho desde el último commit, la supervisión te permite agrupar cambios relacionados antes de comitearlos en la historia del proyecto. Esto significa que puedes hacer todo tipo de edición para agrupar archivos relacionados antes de hacer un commit.
 Es importante crear commits atómicos que hagan más fácil el seguimiento de bugs para revertir los cambios con el menor impacto posible.
@@ -122,7 +126,7 @@ Para el bloque de cambios
 `e` para editar el bloque manualmente
 `q` para salir
 
-### Relación entre git add y git commit
+#### Relación entre git add y git commit
 
 Cuando empiezas un proyecto puedes crear un commit para el estado inicial en ese directorio, usando ambos comandos juntos asi:
 
@@ -136,13 +140,12 @@ Una vez que estás corriendo el proyecto, los nuevos archivos pueden ser añadid
 git add hello.py git commit
 ```
 
-**_git no diferencia entre archivos supervisados en archivos y archivos nuevos que acaban de ser añadidos al repositorio._**
+>_git no diferencia entre archivos supervisados en archivos y archivos nuevos que acaban de ser añadidos al repositorio._
 
----
 
-## Git commit
 
-### Guardando cambios al repositorio
+### Git commit
+#### 🔹 Guardando cambios al repositorio
 
 [Ver convención para los commits](https://www.conventionalcommits.org/es/v1.0.0-beta.2/#especificaci%c3%b3n)
 
@@ -162,7 +165,8 @@ git commit -m "added where are the changes & what they do".
 
 ---
 
-## Git diff
+### Git diff
+#### 🔹 agregar
 
 Diferenciar es una función que toma dos datos de entrada y devuelve los cambios entre éstos.
 `git diff` es un comando de uso múltiple.
@@ -170,7 +174,7 @@ Estos datos diferenciales pueden ser comiteados, podemos crear ramas a partir de
 Vamos a ver los diferentes patrones de flujo de trabajo con git diff.
 `git diff` es comúnmente usado a su vez con `git status` y `git log` para analizar el estado actual de un repositorio.
 
-### Información de salida raw
+#### Información de salida raw
 
 El siguiente ejemplo se ejecuta en un repositorio simple.
 El repo ha sido creado con éstos comandos:
@@ -212,7 +216,7 @@ index 6b0c6cf..b37e70a 100644
 
 Vamos a analizar esta salida por puntos
 
-### Comparison input
+#### Comparison input
 
 ```
 diff --git a/diff_test.txt b/diff_test.txt
@@ -220,7 +224,7 @@ diff --git a/diff_test.txt b/diff_test.txt
 
 Aquí podemos ver un a diff_text y un b diff_test
 
-### Meta data
+#### Meta data
 
 ```
 index 6b0c6cf..b37e70a 100644
@@ -229,7 +233,7 @@ index 6b0c6cf..b37e70a 100644
 Esta línea muestra alguna info interna de Git, normalmente no necesitarás esta info.
 El número corresponde con el hash de versión del objeto en git
 
-### Marcadores para cambios
+#### Marcadores para cambios
 
 ```
 --- a/diff_test.txt
@@ -238,7 +242,7 @@ El número corresponde con el hash de versión del objeto en git
 
 Estas líneas son leyendas asignadas a cada entrada del diff con --- en a y +++ en b
 
-### Diff bloques
+#### Diff bloques
 
 La salida del diff que nos queda es una lista de bloques, el diff solo muestra las secciones del archivos que han sido modificadas.
 En nuestro ejemplo, solo contamos con un bloque, los bloques tienen su propia semántica de salida
@@ -258,7 +262,7 @@ La primera línea es la cabecera del bloque, cada bloque pretende ser encapsulad
 En este ejemplo, el header nos muestra que han sido extraidas 6 líneas empezando en la línea 34 y adicionalmente 8 líneas han sido
 añadidas empezando en la línea 34
 
-### Resaltando cambios
+#### Resaltando cambios
 
 ```
 git diff --color-words
@@ -290,17 +294,18 @@ git diff branch1...other-feature-branch
 
 El operador de tres puntos nos mostrará las diferencias entre la rama de referencia y la rama master desde que éstas se separaron.
 
----
 
-## Git stash
+
+### Git stash
+#### 🔹 agregar
 
 `git stash` nos permite crear una copia de nuestro trabajo no comiteado para movernos a trabajar en otra cosa como otra rama, otro feature manteniendo una copia de nuestro trabajo en el estado actual.Para poder volver después y seguir trabajando con ello.
 
 Los comandos son:
 
 `git stash`, copia los archivos stageados y trackeados.
-`git stash -u` copia además los archivos no trackeados.
-`git stash -a` copia todos los archivos, incluyendo también los archivos ignorados (gitignore).
+`git stash -u`, copia además los archivos no trackeados.
+`git stash -a`, copia todos los archivos, incluyendo también los archivos ignorados (gitignore).
 
 **_Hay que tener en cuenta que por defecto git stash no incluye los archivos no trackeados o ignorados._**
 
@@ -312,7 +317,7 @@ Para reaplicar los cambios a tu rama actual manteniendo la copia del stash lo po
 `git stash apply`
 (De esta manera pese a aplicar los cambios, los mantenemos en el stash para trabajar con ellos más tarde o en otra rama si nos fuese necesario).
 
-### Manejando múltiples stashes
+#### Manejando múltiples stashes
 
 Podemos crear tantos stashes como queramos para trabajar con ellos.
 Sería una buena práctica anotar una descripción para cuando trabajamos con múltiples copias del stash, podemos hacerlo de esta manera:
@@ -337,7 +342,7 @@ Puedes elegir que stash quieres reaplicar pasándole el identificador como argum
 
 `git stash pop stash@{2}`
 
-### Viendo las stash diffs
+#### Viendo las stash diffs
 
 Puedes ver un sumario de diferencias de un stash con _git stash show_:
 
@@ -371,13 +376,13 @@ index 0000000..d92368b
   @@ -1 +1,2 @@ +<link rel="stylesheet" href="style.css"/>
 ```
 
-### Partial stashes
+#### Partial stashes
 
 Puedes elegir para stashear un archivo único, una colección de archivos o cambios individuales de entre los archivos. Si le pasas el parámetro `-p` o `--patch` a git stash, integrará integrará un bloque entre cada cambio en tu copia de trabajo y te preguntará donde quieres stashearlo.
 
 Si pulsas `git stash ?` te aparece una lista más completa de comandos que puedes utilizar
 
-### Creando una rama para nuestro stash
+#### Creando una rama para nuestro stash
 
 Si los cambios de tu rama divergen de los cambios en tu stash, puedes tener algunos conflictos cuando quieras hacer `git stash pop` o `git stash apply`, para evitar estos conflictos, quizás prefieras crear una rama para los cambios del stash, puedes hacerlo utilizando para ello:
 
@@ -385,7 +390,7 @@ Si los cambios de tu rama divergen de los cambios en tu stash, puedes tener algu
 
 Nuestra nueva rama estará basada en el commit de la que fue creada, entonces hará un pop de tus cambios stasheados en ella.
 
-### Limpiando el stash
+#### Limpiando el stash
 
 Si decides que ya no necesitas un stash en particular, puedes borrarlo con git stash drop:
 
@@ -395,10 +400,10 @@ O podrías borrar todos los stashes almacenados con:
 
 `git stash clear`
 
----
 
-## Gitignore
 
+### Gitignore
+#### 🔹 agregar
 Git tiene 3 formas de ver los archivos de tu copia de trabajo:
 Archivos trackeados, sin trackear o ignorados.
 
@@ -409,11 +414,11 @@ cachés de dependencias, código compilado, código compilado, directorios de sa
 Los archivos ignorados son trackeados en especial el gitignore, que es comprobado en la raiz del repositorio.
 Este archivo solo puede ser añadido o comiteado manualmente, y en él especificamos que archivos de nuestro queremos que sea o no ignorado.
 
----
 
-## Git status
 
-#### Inspeccionando un repositorio
+### Git status
+
+#### 🔹 Inspeccionando un repositorio
 
 El comando git status muestra un estado del directorio de trabajo y su estado actual, te deja ver los cambios que han sido stageados, los que no y los archivos que no han sido trackeados.
 Git status no proporciona ningún tipo de información de salida como el historial de los commits, para esto necesitamos usar git log.
@@ -421,10 +426,12 @@ Git status no proporciona ningún tipo de información de salida como el histori
 Comandos relacionados a git status:
 
 `git tag`
+
 Los tags son referencias de puntos especificos en la historia de git.
 Generalmente son usados para capturar un punto en la historia como podría una versión de release (ver 1.0).
 
 `git blame`
+
 La función principal de git blame es mostrar la información del autor unida a un lineas especificas de un archivo o un archivo en sí. Es usado para extraer información de quien o porque modificaron x archivo o lineas de código.
 ejemplos:
 
@@ -433,9 +440,10 @@ git blame filename
 git blame filename -L 0,10
 ```
 
----
 
-## Git log
+
+### Git log
+#### 🔹 Inspeccionando un repositorio
 
 **git log** muestra una lista de los commits realizados en el repositorio. Esto te permite listar la historia del proyecto, filtrarla o buscar cambios especificos.
 
@@ -470,59 +478,60 @@ Solo muestra los commits que incluyen un archivo especifico, es una forma fácil
 `git log --graph --decorate --oneline`
 Una opción bastante útil a considerar. El flag de --graph dibujará a la izquierda basado en texto un gráfico de los commits. --decorate añade los nombres de las ramas y tags de los commits que son mostrados.--oneline condensa la info de los commits en una sola línea para que sea más fácil navegar entre ellos.
 
----
 
-## Git tag
+
+### Git tag
+#### 🔹 agregar
 
 En este apartado vamos a ver el concepto de etiquetar y los comandos de `git tag` las etiquetas son referencias a puntos en la historia de git. Son usados normalmente para apuntar a versiones de lanzamiento (v1.0). Una etiqueta es como una rama que no cambia, a diferencia de las ramas, las etiquetas después de ser creadas, no tienen más historial de commits en esa rama.
 En este apartado cubriremos los difentes tipos de etiqueta, como crearlas, listarlas, borrarlas, compartirlas y más.
 
-Creando etiquetas
+#### Creando etiquetas
 
 Podemos crear una etiqueta con el siguiente comando.
 git tag <tagname>
 
 Reemplaza el tagname con un identificador semantico para el estado del repositorio. Un patron común es usar el número de version como git tag v1.4. Git soporta dos tipos de etiqueta, las etiquetas ligeras son esencialmente como marcapáginas para poner un nombre de puntero a un commit, muy útil para crear pequeños links a commits relevantes, una buena práctica es crear estas etiquetas como privadas.
 
----
 
-Las etiquetas anotadas guardan información extra (Metadata). El nombre de quien crea la etiqueta, email y fecha, etc...
+> Las etiquetas anotadas guardan información extra (Metadata). El nombre de quien crea la etiqueta, email y fecha, etc...
 
----
 
-## Annotated Tags (etiquetas anotadas)
+
+#### Annotated Tags (etiquetas anotadas)
 
 Las etiquetas anotadas son guardadas en la base de git como objetos completos. Para reiterar, guardan metadata como el nombre de quien etiqueta, el email o la fecha. Similar a los commits y los mensajes de los commits, las etiquetas anotadas tienen un mensaje de etiqueta. En adición por seguridad las etiquetas anotadas pueden ser firmadas con GNU privacy Guard (GPG). Las mejores prácticas suguieren que se usen annotated tags en lugar de etiquetas ligeras para tener más control ya que éstas guardan información adicional.
 
-git tag -a v1.4
+`git tag -a v1.4`
 
 Ejecutando este comando crearemos una etiqueta aotada con el identificador v1.4. El comando abrirá una ventana adicional, para insertar información adicional.
 
-git tag -a v1.4 -m "my version 1.4"
+`git tag -a v1.4 -m "my version 1.4"`
 
-Este comando es similar a la ejecución anterior, pero con el parametro adicional de -m podemos crear el mesaje de la etiqueta como hacemos con el commit -m para no tener que insertarlo después desde el editor de texto.
+Este comando es similar a la ejecución anterior, pero con el parámetro adicional de `-m` podemos crear el mensaje de la etiqueta como hacemos con el commit -m para no tener que insertarlo después desde el editor de texto.
 
----
 
-## Etiquetas ligeras (lightweight tags)
 
-git tag v1.4-lw
+#### Etiquetas ligeras (lightweight tags)
 
-Ejecutando este comando podemos crear una etiqueta ligera identificada como v1.4-lw. Éstas etiquetas son creadas sin -a -s o -m.
+`git tag v1.4-lw`
+
+Ejecutando este comando podemos crear una etiqueta ligera identificada como v1.4-lw. Éstas etiquetas son creadas sin `-a` `-s` o `-m`.
 Éstas etiquetas son creadas como un comprobante de etiqueta y almacenadas en .git/directorio del repositorio del proyecto.
 
----
 
-## Listing tags (listar etiquetas)
+
+#### Listing tags (listar etiquetas)
 
 Podemos mostrar una lista de las etiquetas guardadas con:
 
-git tag
+`git tag`
 
-Para tener más control sobre la lista de etiquetas mostradas podemos pasar el parametro -l con una expresión definida:
+Para tener más control sobre la lista de etiquetas mostradas podemos pasar el parámetro `-l` con una expresión definida:
 
-git tag -l _-rc_
+`git tag -l _-rc_`
 
+```
 $ git tag -l _-rc_
 v0.10.0-rc1
 v0.11.0-rc1
@@ -534,41 +543,46 @@ v0.9.0-rc1
 v15.0.0-rc.1
 v15.0.0-rc.2
 v15.4.0-rc.3
+```
 
-_el prefijo -rc se usa por convencion para determinar release candidates_
+>_El prefijo -rc se usa por convencion para determinar release candidates_
 
----
 
-## Tagging old commits (Etiquetando viejos commits)
+
+#### Tagging old commits (Etiquetando viejos commits)
 
 En el ejemplo anterior hemos usado la etiqueta para adjuntarla al commit que esté en la cabecera en ese momento como referencia. Pero podemos usar el tag en un commit especifico para etiquetar viejos commits. Podemos ver una lista de los commits con git log.
 
 Podemos crear el tag para el commit especifico pasandole el id.
 
-git tag -a v1.2 15027957951b64cf874c3557a0f3547bd83b3ff6
+`git tag -a v1.2 15027957951b64cf874c3557a0f3547bd83b3ff6`
 
 Ejecutando este comando de git crearemos una nueva etiqueta anotada con el identificador v1.2 para el commit que seleccionamos en el ejemplo anterior de git log.
 
----
 
-## Reetiquetando o reemplazando etiquetas.
+
+#### Reetiquetando o reemplazando etiquetas
 
 Al intentar crear una etiqueta con un identificador diferente donde ya existía una etiqueta anterior, git nos mostrará este error:
 
-fatal: tag 'v0.4' already exists
+`fatal: tag 'v0.4' already exists`
 
 En adición si intentamos etiquetar un commit anterior con un identificador de etiqueta ya existente, nos arrojará el mismo error.
 
-Para este caso deberíamos actualizar la etiqueta existente y lo podemos hacer con la opción de -f (force).
+Para este caso deberíamos actualizar la etiqueta existente y lo podemos hacer con la opción de `-f` (force).
 
+```
 git tag -a -f v1.4 15027957951b64cf874c3557a0f3547bd83b3ff6
+```
 
-**_Cuando forzamos un identificador ya usado, este se colocará en el nuevo commit y se borrará del commit anterior, esto sucede por que solo podemos tener un identificador único en la historia de git._**
+>**_Cuando forzamos un identificador ya usado, este se colocará en el nuevo commit y se borrará del commit anterior, esto sucede porque solo podemos tener un identificador único en la historia de git._**
 
-## Sharing: Pushing Tags to Remote
+
+#### Sharing: Pushing Tags to Remote
 
 Compartir etiquetas es similar a pushear ramas. Por defecto, git push no pasará las etiquetas. Éstas deben ser pasadas explicitamente al git push.
 
+```
 git push origin v1.4
 Counting objects: 14, done.
 Delta compression using up to 8 threads.
@@ -576,19 +590,20 @@ Compressing objects: 100% (12/12), done.
 Writing objects: 100% (14/14), 2.05 KiB | 0 bytes/s, done.
 Total 14 (delta 3), reused 0 (delta 0)
 To git@bitbucket.com:atlasbro/gittagdocs.git \* [new tag] v1.4 -> v1.4
+```
 
-Para pushear varias etiquetas simultaneamente, podemos pasar el parametro --tags cuando usemos el comando git push. Cuando otros usuarios clonen o puleen el repo, reciviran las nuevas etiquetas.
+Para pushear varias etiquetas simultáneamente, podemos pasar el parámetro `--tags` cuando usemos el comando `git push`. Cuando otros usuarios clonen o pulleen el repo, recibirán las nuevas etiquetas.
 
-## Checking 0ut Tags.(comprobando etiquetas)
+#### Checking 0ut Tags(comprobando etiquetas)
 
-git checkout v1.4
+`git checkout v1.4`
 
-El comando de arriba comprobará la etiqueta v1.4. Esto pondrá el repositorio en un header separado. Esto significa que cualquien cambio realizado en este header no será reflejado en la etiqueta.
+El comando de arriba comprobará la etiqueta v1.4. Esto pondrá el repositorio en un header separado. Esto significa que cualquier cambio realizado en este header no será reflejado en la etiqueta.
 Se creará un nuevo commit separado. Éste nuevo commit separado no será parte de ninguna rama y solo será accesible directamente por la persona que referencie dicho hash.
 De todas formas las buenas prácticas recomiendan que crees una rama, si vas ha hacer cambios en un header separado.
 
-## Deleting tags (borrando etiquetas)
+#### Deleting tags (borrando etiquetas)
 
-Para borrar etiquetas los hacemos directamente pasandole el parámetro -d y un identificador de etiqueta, ésto borrará el identificador de etiqueta.
+Para borrar etiquetas lo hacemos directamente pasándole el parámetro `-d` y un identificador de etiqueta, ésto borrará el identificador de etiqueta.
 
-git tag -d v1
+`git tag -d v1`
