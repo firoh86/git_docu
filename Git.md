@@ -671,3 +671,44 @@ Una metafora graciosa es pensar en que git es una utilidad de manejo de la linea
 Los commmits son isntantaneas, de un punto de interés a lo largo de la línea de tiempo. Adicionalmente, múltiple líneas de tiempo se dan lugar y pueden ser manejadas como ramas "branches". Cuando usamos comandos tipo "undo" lo que hacemos realmente es volver atrás en el tiempo o moverlos a otra rama temporal, donde los errores, no se han dado lugar.
 
 Éste tutorial, te proveerá de las habilidades necesarioas para trabajar con revisiones anteriores de un proyecto. Primero, te muestra como explorar viejos commits y te explicará la diferencia entre revertir commmits públicos en el proyecto en contra de resetear cambios no publicados en tu proyecto local.
+
+## Encontrando lo que se ha perdido
+
+Revisando viejos commits
+
+Toda la idea de tener un soft de control de versiones es poder guardar copias seguras de tu proyecto para no tener que preocuparte de fallos irreparables que rompan tu código por completo. Una vez que has construido un historial de commits en tu proyecto, puedes revisar y revisitar cualquier commit en la historia.
+Una de las utilidades para revisar el historico de los commits sería el comando git log.
+
+Cada commit tiene un id con un hash único. Éstos id´s son usados para viajar a lo largo de la línea de tiempo y revisitar los commits.
+Por defecto, git log mostrará solo los commits referentes a nuestra rama de trabajo. Pero podemos ver los commits historicos de otras ramas con el comando:
+
+git log --branches=\*
+
+El comando git branch es usado para ber y visitar otra ramas.
+El comando git branch -a nos devolverá una lista de todas las ramas conocidas con su nombre.
+Uno de éstos nombres de rama puede ser luego usado para ver los logs especificos de esa rama:
+
+git log --branches="main\*" no tiene el back slash
+
+Cuando has encontrado la referencia del commit en un punto de la historia que queires visitar, puedes utilizar el comando gir checkout para visitar ese commit. git checkout es una forma fácil de cargar uno de estos puntos de guardado en tu maquina local.
+Cuando hacemos un checkout, el header deja de apuntar a una rama, como master o main, y apunta directamente a un commit, con lo cual el header actual estará desconectado de cualquier rama.
+
+# Visualizando una vieja revisión
+
+En este ejemplo asumimos que has empezado a desarrollar como loco de una forma experimentar, pero no estás seguro de su quieres mantener los cambios o no. Para ayudarte a decidir puedes echar un vistazo al estado del proyecto antes de que empezaces a experimentar.
+Primero deberías encontrar la referencia ID de la revisión que quieres ver.
+
+## Deshaciendo un commit
+
+Hay muchas estrategias que podemos tomar para deshacer un commit. En este ejemplo tendríamos un commit que se vería tal que así:
+
+git log --oneline
+
+Vamos a centrarnos en deshacer el 123412347 vamos a intentar algunas cosas medio locas ahora, así que esto se puede descontrolar un poco.
+
+# Como deshacer un commit con git checkout
+
+# Como deshacer un commit público con git revert
+
+Vamos a asumir que volvemos a la historia original del ejemplo.
+Ésta historia incluye el commit con referencia 82fa7e. Vamos a probar con git revert HEAD, si ejecutamos esto, git creará un nuevo commit con la inversión hasta el último commit. Ésto añadirá un nuevo commit hasta la historia de la rama actual y se vería tal que así:
