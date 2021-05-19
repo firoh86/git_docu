@@ -812,3 +812,33 @@ Hemos iniciado una sesión con la opción de -d para borrar directorios sin segu
 ---
 
 ## Git revert
+
+El comando git revert puede ser considerado uno de los de tipo "undo".
+En lugar de remover los cambios de la historia del proyecto de un commit, se busca la forma de invertir los cambios introducidos por el commit y los apendiza en un commit nuevo que como resultado, revierte el contenido sin borrrar el commit.
+Esto previene de perder historia en git, en cual es importante para la integridad de futuras revisiones y una colaboración confiable.
+
+Revert debe ser usado cuando quieras aplicar la inversión a los commits de tu propia historia del proyecto. Puede ser muy útil, por ejemplo, si estás siguiendo un bug en la historia hacia atrás y encuentras donde fué añadido en base a un commit. En lugar de ir manualmente, arrelgarlo y hacer un nuevo commit, usas git revert para automaticamente hacer todo esto por tí.
+
+Git revert espera que la ref de un commit sea pasada como parametro, si no, no se ejecutará.
+Parecido al merge, un revert, creará un commit nuevo el cual abrirá la consola con un promp para que insertes el mensaje del commit. Una vez que el el mensaje del commit se ha creado, git terminará la operación.
+Podemos ahora comprobar con git log el estado del nuevo commit y el estado del repositorio.
+
+Nota que el nuevo commit aparece después del commit que hemos revertido. Gir revert, añade un nuevo commt para revertir los cambios, en lugar de borrar el que ya teníamos.
+
+# Opciones comúnes.
+
+-e
+--edit
+
+Con esto editas el mensaje del commit en revert
+
+--no-edit
+
+Es la opción inversa al edit. Los revert no abrirán el editor.
+
+-n
+--no-commit
+
+# Resetear vs revertir
+
+**_Es importante comprender que git revert deshace solo un commit, no revierte a un estado anterios del proyecto borrando todos los commits subsecuentes. En git ésto es actualmente llamado reset, no revert._**
