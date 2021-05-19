@@ -712,3 +712,13 @@ Vamos a centrarnos en deshacer el 123412347 vamos a intentar algunas cosas medio
 
 Vamos a asumir que volvemos a la historia original del ejemplo.
 Ésta historia incluye el commit con referencia 82fa7e. Vamos a probar con git revert HEAD, si ejecutamos esto, git creará un nuevo commit con la inversión hasta el último commit. Ésto añadirá un nuevo commit hasta la historia de la rama actual y se vería tal que así:
+
+git log --oneline
+
+En este punto técnicamente hemos deshecho los cambios del commit 872fa7e. Y además todavía existe en la historia de git. El nuevo commit e2f9a78 ha invertido los cambios hasta 872fa7e, en diferencia a nuestra estrategia de reversión con git checkout, seguimos usando la mísma rama. Esta solución es una forma de deshacer satisfactoria, es el undo ideal para trabajar en repositorios públicos compartidos. Si te exigen mantener git de un modo más minimalista y limpio, ésta quizás no es la estrategia mas adecuada para ello.
+
+## Como deshacer un commit con git reset
+
+Deshaciendo el último commit
+
+En la sección anterior, hemos visto varias formas de deshacer commits. Esas estrategias son aplicables a la mayoría de los commits recientes. En algunos casos quizás no necesitas borrar o resetear dichos commits, quizás solo te equivocaste al crear dicho commit o lo hiciste de forma prematura. En éste caso podemos usar amend en el commit más reciente. Una vez que has realizado cambios en tu proyecto de trabajo y los has supervisado con git add, puedes ejecutar el comando git commit --amend. Esto abrirá un editor de texto en para que puedas editar el mensaje del commit. Los cambios serán añadidos al commit en cuestión.
