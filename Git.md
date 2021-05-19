@@ -535,7 +535,7 @@ v15.0.0-rc.1
 v15.0.0-rc.2
 v15.4.0-rc.3
 
-_el prefijo -rc se usa por convencion para determinar release candidates_
+el prefijo -rc se usa por convencion para determinar release candidates\_
 
 ---
 
@@ -589,6 +589,85 @@ De todas formas las buenas prácticas recomiendan que crees una rama, si vas ha 
 
 ## Deleting tags (borrando etiquetas)
 
-Para borrar etiquetas los hacemos directamente pasandole el parámetro -d y un identificador de etiqueta, ésto borrará el identificador de etiqueta.
+Para borrar etiquetas lo hacemos directamente pasandole el parámetro -d y un identificador de etiqueta, ésto borrará el identificador de etiqueta.
 
 git tag -d v1
+
+---
+
+## Git Blame
+
+Git status/ git tag/ git blame
+
+Git blame es un comando para resolución de problemas que a alto nivel, lo que hace es mostrar la metadata, perteneciente a líneas de código que han sido comiteadas en un archivo. Esto nos sirve para saber que, quién y por que x código ha sido añadido al repositorio.
+También nos muestra el historial completo de edición de dicho código.
+
+Git blame comunmente es usado con GUI display, un sitio de hosting para Git como bitbucket. El cual ofrece una vista con interfaz para git blame. Esas vistas sirven para discutir acerca de quien ha hecho un pull request o un commit. Adicionalmente, la mayoría de IDE´s que tienen integración con git, suelen tener también vistas del blame.
+
+# How it works
+
+Podemos usarlo de varias formas especificando algunos imputs, para que nos devuelva una salida más detallada, en base a lo que queramos sabes acerca de la edición de los archivos, a continuación mostramos los diferentes ejemplos:
+
+git blame
+
+Con este comando simple, lo que sacamos por consola es una lista del uso de dicho comando.
+
+git blame Readme.md
+
+Ejecutando este comando tendremos una primera vista de como funciona este comando. Este nos devoverá un subconjunto de la salida completa del archivo que mira. Adicionalmente esta lectura, es estatica al momento del repositorio que se está escribiendo.
+
+comando con referencia de id de un commit
+git blame Readme.md d2b8707c4fee5ce3a618a90502e1c780db8307c0
+
+La salida de este blame nos mostrará valores tal que así:
+
+id d2b8707c4fee5ce3a618a90502e1c780db8307c0
+Author Paquito
+Timestamp 2018-03-01 00:54:03 +0000
+Line Number Muestra la línea que se ha modificado.
+Line Content Muestra el contenido editado dentro del archivo.
+
+# Common options
+
+git blame -L 1,4 Git.md
+
+La opcion de -L nos sirve para especificar una orquilla de líneas a comprobar, en este caso estaríamos comprobando de dicho archivo, las líneas de la 1 a la 4.
+
+git blame -w Git.md
+
+La opción de -w ignora los cambios de los espacios en blanco, por ejemplo si un autor anterior, ha cambiado de entre tabs y espacio, esto por desgracia ocuparía espacio innecesario en la salida del git blame.
+
+git -M Git.md
+
+Esta opción nos muestra que líneas han sido movida o copiadas, nos mostrará también el d autor original y no el que realizó estos cambios.
+
+git blame -C
+
+Esta opción nos muestra que líneas han sido copiadas o movidas de otros archivos. Nos muestra el autor original en lugar del autor que copió o movió dichas líneas.
+
+## Git blame vs Git log
+
+Mientras que git blame nos va a mostrar el autor que modifica o copia líneas en un archivo, para extraer el autor original puede ser complicado y tenemos que usar la combinación de -w -C -M. En estos casos será más fácil usar git log.
+
+Para listar todos los commits originales, en los cuales piezas de código han sido añadidas o modificadas, usaremos el comando git log con la opcion -S.
+
+Para comprobar en un archivo si una línea ha sido modificada, podemos pasarla como parametro al git log -S de ésta manera.
+
+git log -S "línea a comprobar de un archivo".
+
+---
+
+## Deshaciendo commits y cambios
+
+git checkout/ git clean/ git revert/ git reset/ git rm
+
+En esta sección, hablaremos sobre las opciones disponibles para volver atrás o a una versión anterios con estrategias de comandos en git. Es importante aclarar que Git no tiene la típica opción de volver atrás como cualquier otro editor de texto.
+En git no tenemos el típico comando "undo" git usa su propia nomenclatura para los comandos que nos dejarán volver atrás y la mentalidad de "undo" en git es diferente.
+Algunas de los terminos que usamos en git son:
+reset, revert, checkout, clean y más.
+
+Una metafora graciosa es pensar en que git es una utilidad de manejo de la linea de tiempo.
+
+Los commmits son isntantaneas, de un punto de interés a lo largo de la línea de tiempo. Adicionalmente, múltiple líneas de tiempo se dan lugar y pueden ser manejadas como ramas "branches". Cuando usamos comandos tipo "undo" lo que hacemos realmente es volver atrás en el tiempo o moverlos a otra rama temporal, donde los errores, no se han dado lugar.
+
+Éste tutorial, te proveerá de las habilidades necesarioas para trabajar con revisiones anteriores de un proyecto. Primero, te muestra como explorar viejos commits y te explicará la diferencia entre revertir commmits públicos en el proyecto en contra de resetear cambios no publicados en tu proyecto local.
