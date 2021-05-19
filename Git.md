@@ -722,3 +722,93 @@ En este punto técnicamente hemos deshecho los cambios del commit 872fa7e. Y ade
 Deshaciendo el último commit
 
 En la sección anterior, hemos visto varias formas de deshacer commits. Esas estrategias son aplicables a la mayoría de los commits recientes. En algunos casos quizás no necesitas borrar o resetear dichos commits, quizás solo te equivocaste al crear dicho commit o lo hiciste de forma prematura. En éste caso podemos usar amend en el commit más reciente. Una vez que has realizado cambios en tu proyecto de trabajo y los has supervisado con git add, puedes ejecutar el comando git commit --amend. Esto abrirá un editor de texto en para que puedas editar el mensaje del commit. Los cambios serán añadidos al commit en cuestión.
+
+git commit --amend
+
+## Deshaciendo cambios que no están comiteados
+
+Antes de que los cambios sean comiteados a la historia del repo, se encuentran en el indice de estado y en el directorio del proyecto. Quizás necesitas deshacer los cambios a través de esas dos areas.
+ambos son mecanismos del manejo de estado de git internamente.
+Para saber más en profundidad como ambos mecanismos funcionan puedes mirar más en profundidad, git reset.
+
+# El directorio de trabajo
+
+El directorio de trabajo generalmente está sincronizado con los archivos locales de tu pc. Para deshacer cambios en el directorio de trabajo puedes editar los archivos como normalmente lo harías en un editor de texto.
+Git tienes varias herramientas para ayudarte a manejar el directorio de trabajo. El comango git clean en una utilidad muy conveniente para deshacer cambios en el directorio de trabajo. Adicionalmente git reset puede ser invocada con --mixec o --hard para aplicar un reset al directorio de trabajo.
+
+# El indice de estado
+
+El comando git add es usado para añadir cambios al indice de estado. Git reset principalmente es usado para deshacer esos cambios.
+Un --mixed reset moverá los cambios pendientes del indice de estado al directorio de trabajo.
+
+# Deshaciendo cambios públicos
+
+Cuando trabajamos en equipo con repositorios remotos, necesitamos una consideración extra para deshacer cambios.
+Git reset debería ser considerado un método para deshacer a modo local.
+Reset debe ser usado cuando deshacemos cambios a una rama privada.
+Esto te prevendrá de borrar commits de otras ramas que quizás están en uso por otros desarrolladores. Los problemas comienzan, cuando un reset es ejecutado en una rama compartida y esta rama entonces es pusheada remotamente con git push.
+Git blockeara el push en este escenario y se quejará de que la rama que está siendo pusheada está desactualizada de la rama remota o ha perdido algunos commits.
+
+**_La mejor forma para deshacer cambios en una rama compartida será git revert_**
+
+Un revert es mucho más seguro de usar en una rama compartida en lugar de un reset, por que no borrará commits de la historia.
+
+Éste método es más seguro para colaboraciones en remoto, porque el desarrollador remoto puede hacer pull de la rama y recibir el nuevo revert commit el cual deshace los cambios del commit no deseado.
+
+---
+
+## Git clean
+
+git checkout/ git clean/ git revert/ git reset/ git rm
+
+# Opciones comunes de uso.
+
+El siguiente contenido muestra varios usos para git clean, varios casos y las líneas que acompañan este comando.
+
+-n
+
+La opción de -n realizará una ejecución en seco del comando git clean esto te muestra que archivos están siendo removidos sin que sean removidos como tal. Como una simulación de git clean.
+Es una buena práctica ejecutar siempre un git clean -n antes que un git clean.
+
+git clean -n Would remove untracked_file
+
+La salida nos dirá que archivos no supervisados serán borrados con el comando git clean. Los directorios no trackeados no aparecen en la salida de git clean. Por defecto git clean no opera recursivamente en directorios. Esto es otro mecanismo de seguridad para prevenir borrados permanentes por accidente.
+
+-f or --force
+
+La opcion de force inicia el borrado actual de los archivos sin revision en el directorio actual. Force no requiere del comando clean.
+La opcion de requireForce biene establecida como falso por defecto.
+No borrará archivos o carpetas que aparezcan en el .gitignore sin trackear.
+Ahora nos permite ejecutar en vivo git clean en nuestro repositorio de ejemplo:
+
+git clean -f Removing untracked_file
+
+git clean -f -d include directories
+
+La opción -d le dice a git clean que además quieres borrar cualquier directorio que no esté en seguimiento, por defecto ignorará los directorios. Podemos añadir la opción -d a nuestro ejemplo anterior.
+
+git clean -dn Would remove untracked_dir/ git clean -df Removing untracked_dir/
+
+La opcion -dn es una versión simulada que incluye directorios sin seguimiento.
+La opción -df forzará el borrado de los directorios sin seguimiento con el comando git clean.
+
+-x force removal of ignored files
+
+El comando -x con git clean añadirá también los archivos que no estén siendo seguidos en el .gitignore, es una buena práctica comprobar que la ruta donde ejecutamos el git clean, no esté afectando a otros directorios como el build, etc...
+También es una buena práctica como con el resto de opciones tirar el comando a modo de simulación antes de ejecutar el git clean -x para saber que archivos sin seguimientos serán borrados.
+
+git clean -xf
+
+Como vemos aquí también podemos combinar ambas opciones para hacer una opción combinada, en este caso -xf forzara a borrar todos los archivos del directorio actual que no estén en seguimiento y cualquier archivo que sea ignorado.
+
+## Modo de limpieza interactiva o git clean interactivo
+
+Además de los comandos en la consola que hemos demostrado hasta aquí, git clean tiene también un modo interactivo que nos deja iniciar pasandole la opcion de -i.
+
+git clean -di Would remove the following items:
+
+Hemos iniciado una sesión con la opción de -d para borrar directorios sin seguimiento. El modo interactivo nos mostrará una alerta en la línea de comandos para aplicar los archivos sin seguimiento.
+
+---
+
+## Git revert
